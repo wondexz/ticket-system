@@ -103,6 +103,12 @@ client.on('interactionCreate', async (interaction) => {
       parent: category || undefined,
     });
 
+    // Kullanıcıya kanalı görebilme ve mesaj gönderebilme yetkisi verme
+    await channel.permissionOverwrites.edit(interaction.user, {
+      VIEW_CHANNEL: true,
+      SEND_MESSAGES: true,
+    });
+
     await channel.permissionOverwrites.edit(guild.roles.everyone, {
       VIEW_CHANNEL: false,
       SEND_MESSAGES: false,
@@ -138,6 +144,7 @@ client.on('interactionCreate', async (interaction) => {
     }
   }
 });
+
 // destek kapat
 
 client.on('messageCreate', async (message) => {
@@ -145,10 +152,10 @@ client.on('messageCreate', async (message) => {
     const channelToDelete = message.channel;
 
     if (channelToDelete.parentId === config.destek_kategori_id && channelToDelete.id !== config.destek_log) {
-
+      // Tüm mesajları al
       const messages = await channelToDelete.messages.fetch();
       
-
+      // Mesajları bir transcript olarak kaydet (örneğin, JSON formatında)
       const transcript = messages.map(msg => {
         return {
           author: msg.author.tag,
@@ -157,10 +164,10 @@ client.on('messageCreate', async (message) => {
         };
       });
 
-
+      // Transcript'i dosyaya kaydet (örneğin, JSON formatında)
       fs.writeFileSync('transcript.json', JSON.stringify(transcript, null, 2));
 
-
+      // Kanalı sil
       await channelToDelete.delete();
 
       const logKanal = message.guild.channels.cache.get(config.destek_log);
@@ -172,7 +179,7 @@ client.on('messageCreate', async (message) => {
       if (logKanal) {
         logKanal.send({ embeds: [embed] });
 
-
+        // Eğer bir dosyaya kaydetmek isterseniz burada kaydedilen transcript dosyasının linkini gönderebilirsiniz
         logKanal.send({ files: ['transcript.json'] });
       }
     } else {
