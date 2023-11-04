@@ -1,0 +1,14 @@
+{
+  "name": "ailght-destek-sistemi",
+  "version": "1.0.0",
+  "description": "ailght'in özel destek sistemi",
+  "main": "index.js",
+  "scripts": {
+    "test": "node index.js"
+  },
+  "keywords": [
+    "ticket"
+  ],
+  "author": "wondexz",
+  "license": "MIT"
+}
