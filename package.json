@@ -1,0 +1,24 @@
+{
+  "name": "wondexz-destek",
+  "version": "1.0.0",
+  "description": "wondexz-destek",
+  "main": "bot.js",
+  "scripts": {
+    "start": "node shard.js"
+  },
+  "author": "wondexz",
+  "license": "ISC",
+  "dependencies": {
+    "@discordx/music": "^6.1.0",
+    "@iamtraction/google-translate": "^2.0.1",
+    "chalk": "^3.0.0",
+    "croxydb": "^0.0.7",
+    "delay": "^5.0.0",
+    "discord-html-transcripts": "^3.2.0",
+    "discord-player": "^6.6.7",
+    "discord.js": "^14.12.1",
+    "humanize-duration": "^3.29.0",
+    "moment": "^2.29.4",
+    "moment-duration-format": "^2.3.2"
+  }
+}
